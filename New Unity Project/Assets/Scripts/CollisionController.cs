@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/************************************************
+ *  CollisionController handles the collisions of the bullets
+ *  with the players and the planets
+ ***********************************************/
 public class CollisionController : MonoBehaviour
 {
-    public delegate void OnHit();
+    //! Delegate used in classes that bullet can collide with
+    /*!  used in other classes so the behaviour of getting hit can be changed
+         Class by Class */
+    public delegate void OnHit(); 
     public static event OnHit onHit;
 
+    //! Enum used to track where the bullet came from
     public enum player { PLAYER1, PLAYER2};
     public player Player;
     float timer = 0f;
 
+
+    //!On CollisionEnter function - UNITY function
+    /*! takes a Collision as a parameter and returns void
+     * is used to do several things when the bullet collides 
+     * with various objects*/
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Affector"))
@@ -44,6 +58,8 @@ public class CollisionController : MonoBehaviour
         }
     }
 
+    //! Normal Unity update function
+    /*! Called every frame */
     private void Update()
     {
         timer += Time.deltaTime;

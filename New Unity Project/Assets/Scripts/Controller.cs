@@ -2,16 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/************************************************
+ *  Controller is used on the player ships
+ *  Controls the firing
+ ***********************************************/
 public class Controller : MonoBehaviour
 {
+    //! Reference to the class that will instatiate the bullet
     public Weapon hardpoint;
+    //! Has this controller already fired
+    /*! Need to stop players from been able to spam missles */
     public bool fired = false;
 
+    //!Start function
     private void Start()
     {
         CollisionController.onHit += ToggleFire;
     }
 
+    //!Function that handles the firing of the Weapon class 
+    /*! Checks which players turn it is then proceeds
+     * to call the fire function from that players controllers 
+     * Weapon reference */
     public void Fire()
     {
         if (!fired)
@@ -33,6 +45,7 @@ public class Controller : MonoBehaviour
 
         }
     }
+    //*Toggles fired to false
     void ToggleFire()
     {
         fired = false;
